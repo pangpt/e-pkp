@@ -37,7 +37,7 @@
                         <form class="digital-add needs-validation">
                             <div class="form-group row">
                                 <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Indikator Kinerja</label>
-                                <select class="form-control select2 col-md-7" required="">
+                                <select class="form-control select2 col-md-7" required="" name="indikator_kegiatan_id">
                                     <option value="">- Piliha Indikator Kegiatan -</option>
                                     @foreach($indikator as $key)
                                         <option value="">{{$key->uraian}}</option>
@@ -46,7 +46,7 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-xl-3 col-md-4">Tanggal</label>
-                                <input class="datepicker-here form-control digits col-md-7" type="text" data-language="en">
+                                <input class="datepicker-here form-control digits col-md-7" type="text" data-language="en" name="tanggal">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Uraian Kegiatan</label>
@@ -64,16 +64,16 @@
                                         <th>Nilai Capaian Kerja</th>
                                     </tr>
                                     <tr>
-                                        <td><textarea name="" id="" cols="30" rows="5"></textarea></td>
-                                        <td><input type="text" name="addmore[0][qty]" placeholder="0" class="form-control" /></td>
-                                        <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                                        <td><input type="text" name="addmore[0][price]" placeholder="Dokumen" class="form-control" /></td>
-                                        <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                                        <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                                        <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                                        <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                                        <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                                        <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
+                                        <td><textarea name="kegiatan[]" id="" cols="30" rows="5"></textarea></td>
+                                        <td><input type="text" name="angka_kredit_target[]" placeholder="0" class="form-control" /></td>
+                                        <td><input type="text" name="kuant_target[]" placeholder="0" class="form-control" /></td>
+                                        <td><input type="text" name="satuan_target[]" placeholder="Dokumen" class="form-control" /></td>
+                                        <td><input type="text" name="kual_target[]" placeholder="0" class="form-control" /></td>
+                                        <td><input type="text" name="angka_kredit_realisasi[]" placeholder="0" class="form-control" /></td>
+                                        <td><input type="text" name="kuant_realisasi[]" placeholder="0" class="form-control" /></td>
+                                        <td><input type="text" name="satuan_realisasi[]" placeholder="0" class="form-control" /></td>
+                                        <td><input type="text" name="kual_realisasi[]" placeholder="0" class="form-control" /></td>
+                                        <td><input type="text" name="nilai_capaian_kerja[]" placeholder="0" class="form-control" /></td>
                                         <td><button type="button" name="add" id="add" class="btn btn-success btn-sm"><i class="fa fa-plus"></button></td>
                                     </tr>
                                 </table>
@@ -102,16 +102,16 @@
 
            $("#dynamicTable").append(
                `<tr>
-                    <td><textarea name="" id="" cols="30" rows="5"></textarea></td>
-                    <td><input type="text" name="addmore[0][qty]" placeholder="0" class="form-control" /></td>
-                    <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                    <td><input type="text" name="addmore[0][price]" placeholder="Dokumen" class="form-control" /></td>
-                    <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                    <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                    <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                    <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                    <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
-                    <td><input type="text" name="addmore[0][price]" placeholder="0" class="form-control" /></td>
+                    <td><textarea name="kegiatan[]" id="" cols="30" rows="5"></textarea></td>
+                    <td><input type="text" name="angka_kredit_target[]" placeholder="0" class="form-control" /></td>
+                    <td><input type="text" name="kuant_target[]" placeholder="0" class="form-control" /></td>
+                    <td><input type="text" name="satuan_target[]" placeholder="Dokumen" class="form-control" /></td>
+                    <td><input type="text" name="kual_target[]" placeholder="0" class="form-control" /></td>
+                    <td><input type="text" name="angka_kredit_realisasi[]" placeholder="0" class="form-control" /></td>
+                    <td><input type="text" name="kuant_realisasi[]" placeholder="0" class="form-control" /></td>
+                    <td><input type="text" name="satuan_realisasi[]" placeholder="0" class="form-control" /></td>
+                    <td><input type="text" name="kual_realisasi[]" placeholder="0" class="form-control" /></td>
+                    <td><input type="text" name="nilai_capaian_kerja[]" placeholder="0" class="form-control" /></td>
                     <td>
                         <button type="button" class="btn btn-danger remove-tr"><i class="fa fa-minus"></button>
                     </td>
