@@ -66,3 +66,5 @@
 <script src="/assets/js/datepicker/datepicker.js"></script>
 <script src="/assets/js/datepicker/datepicker.en.js"></script>
 <script src="/assets/js/datepicker/datepicker.custom.js"></script>
+
+<script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>

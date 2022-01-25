@@ -10,8 +10,9 @@
         </div>
         <div class="nav-right col">
             <ul class="nav-menus">
-                <li class="onhover-dropdown"><i data-feather="bell"></i><span class="badge badge-pill badge-primary pull-right notification-badge">3</span><span class="dot"></span>
-                    <ul class="notification-dropdown onhover-show-div p-0">
+                <li class="onhover-dropdown">
+                    {{-- <i data-feather="bell"></i><span class="badge badge-pill badge-primary pull-right notification-badge">3</span><span class="dot"></span> --}}
+                    {{-- <ul class="notification-dropdown onhover-show-div p-0">
                         <li>Notification <span class="badge badge-pill badge-primary pull-right">3</span></li>
                         <li>
                             <div class="media">
@@ -38,18 +39,18 @@
                             </div>
                         </li>
                         <li class="txt-dark"><a href="#">All</a> notification</li>
-                    </ul>
+                    </ul> --}}
                 </li>
                 <li class="onhover-dropdown">
                     <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle blur-up lazyloaded" src="../assets/images/dashboard/man.png" alt="header-user">
                         <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
-                        <li><a href="#"><i data-feather="user"></i>Edit Profile</a></li>
-                        <li><a href="#"><i data-feather="mail"></i>Inbox</a></li>
+                        <li><a href="{{route('akun')}}"><i data-feather="user"></i>Edit Profile</a></li>
+                        {{-- <li><a href="#"><i data-feather="mail"></i>Inbox</a></li>
                         <li><a href="#"><i data-feather="lock"></i>Lock Screen</a></li>
-                        <li><a href="#"><i data-feather="settings"></i>Settings</a></li>
-                        <li><a href="#"><i data-feather="log-out"></i>Logout</a></li>
+                        <li><a href="#"><i data-feather="settings"></i>Settings</a></li> --}}
+                        <li><a href="{{route('logout')}}"><i data-feather="log-out"></i>Logout</a></li>
                     </ul>
                 </li>
             </ul>

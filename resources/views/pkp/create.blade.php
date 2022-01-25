@@ -41,7 +41,7 @@
                                 <select class="form-control select2 col-md-7" required="" name="indikator_kegiatan_id[]">
                                     <option value="">- Piliha Indikator Kegiatan -</option>
                                     @foreach($indikator as $key)
-                                        <option value="">{{$key->uraian}}</option>
+                                        <option value="{{$key->id}}">{{$key->uraian}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -67,14 +67,14 @@
                                     <tr>
                                         <td><textarea name="kegiatan[]" id="" cols="30" rows="5"></textarea></td>
                                         <td><input type="text" name="angka_kredit_target[]" placeholder="0" class="form-control" /></td>
-                                        <td><input type="text" name="kuant_target[]" placeholder="0" class="form-control" /></td>
+                                        <td><input type="text" name="kuant_target[]" placeholder="0" class="form-control"/></td>
                                         <td>
                                             <select class="form-control select2" required="" name="satuan_target[]">
                                                     <option value="Satuan">Satuan</option>
                                                     <option value="Dokumen">Dokumen</option>
                                             </select>
                                         </td>
-                                        <td><input type="text" name="kual_target[]" placeholder="0" class="form-control" /></td>
+                                        <td><input type="text" name="kual_target[]" placeholder="0" class="form-control" value="100"/></td>
                                         <td><input type="text" name="angka_kredit_realisasi[]" placeholder="0" class="form-control" /></td>
                                         <td><input type="text" name="kuant_realisasi[]" placeholder="0" class="form-control" /></td>
                                         <td>
@@ -84,7 +84,7 @@
                                             </select>
                                         </td>
                                         <td><input type="text" name="kual_realisasi[]" placeholder="0" class="form-control" /></td>
-                                        <td><input type="text" name="nilai_capaian_kerja[]" placeholder="0" class="form-control" /></td>
+                                        <td><input type="text" name="nilai_capaian_kerja[]" placeholder="0" class="form-control" value="100"/></td>
                                         <td><button type="button" name="add" id="add" class="btn btn-success btn-sm"><i class="fa fa-plus"></button></td>
                                     </tr>
                                 </table>

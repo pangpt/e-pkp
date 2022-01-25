@@ -7,8 +7,7 @@
         <div class="sidebar-user text-center">
             <div><img class="img-60 rounded-circle lazyloaded blur-up" src="../assets/images/dashboard/man.png" alt="#">
             </div>
-            <h6 class="mt-3 f-14">Super Admin</h6>
-            <p>administrator</p>
+            <h6 class="mt-3 f-14">{{Auth::user()->name}}</h6>
         </div>
         <ul class="sidebar-menu">
             <li><a class="sidebar-header" href="index.html"><i data-feather="home"></i><span>Dashboard</span></a></li>
@@ -28,7 +27,7 @@
             </li>
             {{-- <li><a class="sidebar-header" href="reports.html"><i data-feather="clipboard"></i><span>Sasaran Kinerja</span></a></li> --}}
             <li><a class="sidebar-header" href="reports.html"><i data-feather="users"></i><span>Manajemen Pengguna</span></a></li>
-            <li><a class="sidebar-header" href="invoice.html"><i data-feather="user"></i><span>Akun</span></a>
+            <li><a class="sidebar-header" href="{{route('akun')}}"><i data-feather="user"></i><span>Akun</span></a>
             </li>
             <li><a class="sidebar-header" href="login.html"><i data-feather="log-in"></i><span>Logout</span></a>
             </li>

@@ -33,11 +33,26 @@ Route::group(['middleware' => 'ceklogin'], function() {
     Route::get('/penilaian', 'PenilaianKinerjaController@index')->name('penilaian.index');
     Route::get('/penilaian/create', 'PenilaianKinerjaController@create')->name('penilaian.create');
     Route::post('/penilaian/input', 'PenilaianKinerjaController@inputPenilaian')->name('penilaian.input');
+    Route::post('/penilaian/action', 'PenilaianKinerjaController@actionPenilaian')->name('tabledit.action');
+
+    Route::get('penliaian/print', 'PenilaianKinerjaController@print')->name('cetak.pkp');
+
+    Route::post('/penilaian/edit/{id}', 'PenilaianKinerjaController@editPKP')->name('penilaian.edit');
+    Route::get('/penilaian/hapus/{id}', 'PenilaianKinerjaController@hapus')->name('penilaian.hapus');
 
     Route::get('/masterdata/indikator', 'IndikatorKegiatanController@index')->name('indikator.index');
     Route::get('/masterdata/indikator/create', 'IndikatorKegiatanController@create')->name('indikator.create');
     Route::post('/masterdata/indikator/input', 'IndikatorKegiatanController@inputIndikator')->name('indikator.inputIndikator');
+
+    Route::get('/akun', 'AkunController@akun')->name('akun');
+    Route::post('/akun/edit', 'AkunController@editAkun')->name('akun.edit');
+
+
+
 });
+
+Route::get('/logout', 'LoginController@logout')->name('logout');
+
 
 
 
