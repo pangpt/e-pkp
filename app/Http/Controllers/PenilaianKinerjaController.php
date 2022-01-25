@@ -12,7 +12,11 @@ class PenilaianKinerjaController extends Controller
 
     public function index() {
 
-        return view('pkp.index');
+        $data = PenilaianKinerja::get();
+
+        return view('pkp.index', [
+            'data' => $data,
+        ]);
     }
 
     public function create() {
@@ -26,11 +30,12 @@ class PenilaianKinerjaController extends Controller
     }
 
     public function inputPenilaian(Request $request) {
-        $delete = PenilaianKinerja::where('user_id', auth()->guard('web')->user()->id)->delete();
+        // $delete = PenilaianKinerja::where('user_id', 1)->delete();
         foreach($request->kegiatan as $key => $val){
             $penilaian  = new PenilaianKinerja;
-            $penilaian->user_id =  $request->user_id;
-            $penilaian->indikator_kegiatan_id =  $request->indikator_kegiatan_id;
+            // $penilaian->user_id =  1;
+            $penilaian->indikator_kegiatan_id = 1;
+            // $penilaian->tanggal = $request->tanggal;
             $penilaian->kegiatan =  $val;
             $penilaian->angka_kredit_target =  $request->angka_kredit_target[$key];
             $penilaian->kuant_target =  $request->kuant_target[$key];
@@ -44,9 +49,11 @@ class PenilaianKinerjaController extends Controller
 
             $penilaian->nilai_capaian =  $request->kuant_realisasi[$key] / $request->kuant_target[$key] * 100;
 
+            // dd($penilaian);
             $penilaian->save();
-            
-            return  redirect()->route('pkp.index');
         }
+
+
+        return redirect()->route('penilaian.index');
     }
 }

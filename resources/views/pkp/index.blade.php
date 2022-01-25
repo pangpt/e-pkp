@@ -38,10 +38,11 @@
                         <div class="btn-popup pull-right">
                             <a href="{{route('penilaian.create')}}" class="btn btn-secondary">Create User</a>
                         </div>
-                        <table class="display" id="basic-1">
-                            <thead>
+                        <table class="table table-stipped">
+                            @foreach($data as $key)
+                            <thead class="thead-dark">
                             <tr>
-                                <th colspan="13">Indikator Kinerja: </th>
+                                <th colspan="13">Indikator Kinerja: {{@$key->indikator_kegiatan->uraian}}</th>
                             </tr>
                             <tr style="border-collapse: collapse">
                                 <th>No.</th>
@@ -59,52 +60,20 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>#51240</td>
-                                <td>#51240</td>
-                                <td>#51240</td>
-                                <td><span class="badge badge-secondary">Cash On Delivery</span></td>
-                                <td>Paypal</td>
-                                <td><span class="badge badge-success">Delivered</span></td>
-                                <td>Dec 10,18</td>
-                                <td>$54671</td>
-                                <td>$54671</td>
-                                <td>$54671</td>
-                                <td>$54671</td>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{@$key->kegiatan}}</td>
+                                <td>{{@$key->angka_kredit_target}}</td>
+                                <td>{{@$key->kuant_target}}</td>
+                                <td>{{@$key->satuan_target}}</td>
+                                <td>{{@$key->kual_target}}</td>
+                                <td>{{@$key->angka_kredit_realisasi}}</td>
+                                <td>{{@$key->kuant_realisasi}}</td>
+                                <td>{{@$key->satuan_realisasi}}</td>
+                                <td>{{@$key->kual_realisasi}}</td>
+                                <td>{{@$key->nilai_capaian}}</td>
                             </tr>
                             </tbody>
-                            <thead>
-                                <tr>
-                                    <th colspan="13">Indikator Kinerja: </th>
-                                </tr>
-                                <tr style="border-collapse: collapse">
-                                    <th>No.</th>
-                                    <th>Kegiatan Tugas Jabatan</th>
-                                    <th>AK</th>
-                                    <th>Kuant/Output</th>
-                                    <th>Satuan (Target)</th>
-                                    <th>Kual/Mutu (Target)</th>
-                                    <th>AK</th>
-                                    <th>Kuant/Output</th>
-                                    <th>Satuan (Realisasi)</th>
-                                    <th>Kual/Mutu (Realisasi)</th>
-                                    <th>Nilai Capaian Kerja</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>#51240</td>
-                                        <td>#51240</td>
-                                        <td>#51240</td>
-                                        <td><span class="badge badge-secondary">Cash On Delivery</span></td>
-                                        <td>Paypal</td>
-                                        <td><span class="badge badge-success">Delivered</span></td>
-                                        <td>Dec 10,18</td>
-                                        <td>$54671</td>
-                                        <td>$54671</td>
-                                        <td>$54671</td>
-                                        <td>$54671</td>
-                                    </tr>
-                                    </tbody>
+                            @endforeach
                         </table>
                     </div>
                 </div>

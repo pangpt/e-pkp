@@ -34,10 +34,11 @@
                         <h5>Tambah</h5>
                     </div>
                     <div class="card-body">
-                        <form class="digital-add needs-validation">
+                        <form class="digital-add needs-validation" action="{{route('penilaian.input')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-group row">
                                 <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Indikator Kinerja</label>
-                                <select class="form-control select2 col-md-7" required="" name="indikator_kegiatan_id">
+                                <select class="form-control select2 col-md-7" required="" name="indikator_kegiatan_id[]">
                                     <option value="">- Piliha Indikator Kegiatan -</option>
                                     @foreach($indikator as $key)
                                         <option value="">{{$key->uraian}}</option>
@@ -46,7 +47,7 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-xl-3 col-md-4">Tanggal</label>
-                                <input class="datepicker-here form-control digits col-md-7" type="text" data-language="en" name="tanggal">
+                                <input class="form-control digits col-md-7" type="date" data-language="en" name="tanggal[]">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Uraian Kegiatan</label>
@@ -55,11 +56,11 @@
                                         <th style="width:25%">Kegiatan Tugas Jabatan</th>
                                         <th>AK</th>
                                         <th>Kuant/Output (Target)</th>
-                                        <th>Satuan (Target)</th>
+                                        <th style="width:10%">Satuan (Target)</th>
                                         <th>Kual/Mutu (Target)</th>
                                         <th>AK</th>
-                                        <th>Kuant/Output (Target)</th>
-                                        <th>Satuan (Realisasi)</th>
+                                        <th>Kuant/Output (Realisasi)</th>
+                                        <th style="width:10%">Satuan (Realisasi)</th>
                                         <th>Kual/Mutu (Realisasi)</th>
                                         <th>Nilai Capaian Kerja</th>
                                     </tr>
@@ -67,11 +68,21 @@
                                         <td><textarea name="kegiatan[]" id="" cols="30" rows="5"></textarea></td>
                                         <td><input type="text" name="angka_kredit_target[]" placeholder="0" class="form-control" /></td>
                                         <td><input type="text" name="kuant_target[]" placeholder="0" class="form-control" /></td>
-                                        <td><input type="text" name="satuan_target[]" placeholder="Dokumen" class="form-control" /></td>
+                                        <td>
+                                            <select class="form-control select2" required="" name="satuan_target[]">
+                                                    <option value="Satuan">Satuan</option>
+                                                    <option value="Dokumen">Dokumen</option>
+                                            </select>
+                                        </td>
                                         <td><input type="text" name="kual_target[]" placeholder="0" class="form-control" /></td>
                                         <td><input type="text" name="angka_kredit_realisasi[]" placeholder="0" class="form-control" /></td>
                                         <td><input type="text" name="kuant_realisasi[]" placeholder="0" class="form-control" /></td>
-                                        <td><input type="text" name="satuan_realisasi[]" placeholder="0" class="form-control" /></td>
+                                        <td>
+                                            <select class="form-control select2" required="" name="satuan_realisasi[]">
+                                                    <option value="Satuan">Satuan</option>
+                                                    <option value="Dokumen">Dokumen</option>
+                                            </select>
+                                        </td>
                                         <td><input type="text" name="kual_realisasi[]" placeholder="0" class="form-control" /></td>
                                         <td><input type="text" name="nilai_capaian_kerja[]" placeholder="0" class="form-control" /></td>
                                         <td><button type="button" name="add" id="add" class="btn btn-success btn-sm"><i class="fa fa-plus"></button></td>
@@ -79,7 +90,7 @@
                                 </table>
                             </div>
 
-                            <button type="button" class="btn btn-primary d-block">Save</button>
+                            <button type="submit" class="btn btn-primary d-block">Save</button>
                         </form>
                     </div>
                 </div>
@@ -105,11 +116,21 @@
                     <td><textarea name="kegiatan[]" id="" cols="30" rows="5"></textarea></td>
                     <td><input type="text" name="angka_kredit_target[]" placeholder="0" class="form-control" /></td>
                     <td><input type="text" name="kuant_target[]" placeholder="0" class="form-control" /></td>
-                    <td><input type="text" name="satuan_target[]" placeholder="Dokumen" class="form-control" /></td>
+                    <td>
+                        <select class="form-control select2" required="" name="satuan_target[]">
+                                <option value="Satuan">Satuan</option>
+                                <option value="Dokumen">Dokumen</option>
+                        </select>
+                    </td>
                     <td><input type="text" name="kual_target[]" placeholder="0" class="form-control" /></td>
                     <td><input type="text" name="angka_kredit_realisasi[]" placeholder="0" class="form-control" /></td>
                     <td><input type="text" name="kuant_realisasi[]" placeholder="0" class="form-control" /></td>
-                    <td><input type="text" name="satuan_realisasi[]" placeholder="0" class="form-control" /></td>
+                    <td>
+                        <select class="form-control select2" required="" name="satuan_realisasi[]">
+                                <option value="Satuan">Satuan</option>
+                                <option value="Dokumen">Dokumen</option>
+                        </select>
+                    </td>
                     <td><input type="text" name="kual_realisasi[]" placeholder="0" class="form-control" /></td>
                     <td><input type="text" name="nilai_capaian_kerja[]" placeholder="0" class="form-control" /></td>
                     <td>

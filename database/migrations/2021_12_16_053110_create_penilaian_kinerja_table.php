@@ -15,6 +15,7 @@ class CreatePenilaianKinerjaTable extends Migration
     {
         Schema::create('penilaian_kinerja', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('indikator_kegiatan_id');
             $table->date('tanggal')->nullable();
             $table->string('kegiatan')->nullable();
