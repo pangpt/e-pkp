@@ -47,6 +47,9 @@ Route::group(['middleware' => 'ceklogin'], function() {
     Route::get('/akun', 'AkunController@akun')->name('akun');
     Route::post('/akun/edit', 'AkunController@editAkun')->name('akun.edit');
 
+    Route::get('/pegawai', 'PegawaiController@index')->name('pegawai.index');
+    Route::get('/pegawai/create', 'PegawaiController@create')->name('pegawai.create');
+
 
 
 });

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PenilaianView;
 use Illuminate\Http\Request;
 use App\IndikatorKegiatan;
 use App\PenilaianKinerja;
 use DB;
 use PDF;
+use Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PenilaianKinerjaController extends Controller
 {
@@ -18,6 +21,7 @@ class PenilaianKinerjaController extends Controller
         foreach($data as $item){
             $idn[] = IndikatorKegiatan::where('id', $item->id)->with('penilaian_kinerja')->get();
         }
+
 
 
         // dd($a);
@@ -51,7 +55,7 @@ class PenilaianKinerjaController extends Controller
         // $delete = PenilaianKinerja::where('user_id', 1)->delete();
         foreach($request->kegiatan as $key => $val){
             $penilaian  = new PenilaianKinerja;
-            // $penilaian->user_id =  1;
+            $penilaian->user_id =  Auth::user()->id;
             $penilaian->indikator_kegiatan_id = $request->indikator_kegiatan_id[$key];
             $penilaian->tanggal = $request->tanggal[$key];
             $penilaian->kegiatan =  $val;
@@ -64,11 +68,14 @@ class PenilaianKinerjaController extends Controller
             $penilaian->satuan_realisasi =  $request->satuan_realisasi[$key];
             $penilaian->kual_realisasi =  100;
 
+            
+
 
             $penilaian->nilai_capaian =  $request->kuant_realisasi[$key] / $request->kuant_target[$key] * 100;
 
             // dd($penilaian);
             $penilaian->save();
+
         }
 
 
@@ -88,6 +95,8 @@ class PenilaianKinerjaController extends Controller
         $penilaian->kual_target = $request->kual_target;
         $penilaian->kuant_realisasi = $request->kuant_realisasi;
         $penilaian->kual_realisasi = $request->kual_realisasi;
+
+        $penilaian->nilai_capaian = $request->kuant_realisasi / $request->kuant_target * 100;
 
         $penilaian->update();
 
@@ -133,11 +142,12 @@ class PenilaianKinerjaController extends Controller
 
     public function print(Request $request)
     {
-        $data = IndikatorKegiatan::get();
+        // $data = IndikatorKegiatan::get();
 
-        $pdf = PDF::loadview('print.pkp_pdf',[
-            'data' => $data,
-        ])->setPaper('A4','landscape');
-        return $pdf->stream();
+        // $pdf = PDF::loadview('print.pkp_pdf',[
+        //     'data' => $data,
+        // ])->setPaper('A4','landscape');
+        // return $pdf->stream();
+        return Excel::download(new PenilaianView, 'pkp.xlsx');
     }
 }

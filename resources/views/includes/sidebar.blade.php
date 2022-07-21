@@ -26,7 +26,7 @@
                 </ul>
             </li>
             {{-- <li><a class="sidebar-header" href="reports.html"><i data-feather="clipboard"></i><span>Sasaran Kinerja</span></a></li> --}}
-            <li><a class="sidebar-header" href="reports.html"><i data-feather="users"></i><span>Manajemen Pengguna</span></a></li>
+            <li><a class="sidebar-header" href="{{route('pegawai.index')}}"><i data-feather="users"></i><span>Manajemen Pegawai</span></a></li>
             <li><a class="sidebar-header" href="{{route('akun')}}"><i data-feather="user"></i><span>Akun</span></a>
             </li>
             <li><a class="sidebar-header" href="login.html"><i data-feather="log-in"></i><span>Logout</span></a>
