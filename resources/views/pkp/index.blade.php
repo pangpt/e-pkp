@@ -64,13 +64,13 @@
                                 <th>Kual/Mutu</th>
                             </tr>
                             </thead>
-                            <tfoot style="text-align: center">
+                            {{-- <tfoot style="text-align: center">
                                 <tr style="background-color: yellow">
                                     <th colspan="10">Nilai Capaian</th>
                                     <th>100</th>
                                     <th></th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> --}}
                             <tbody>
                                 @foreach($item->penilaian_kinerja as $key)
                             <tr>
@@ -96,7 +96,7 @@
                             @endforeach
                         </table>
                         @endforeach
-                        <table id="editable" class="table table-bordered">
+                        {{-- <table id="editable" class="table table-bordered">
                             <thead class="thead" style="background-color: yellow">
                             <tr>
                                 <th colspan="3" style="text-align: center">REKAPITULASI PENILAIAN CAPAIAN KINERJA BULAN 2022</th>
@@ -123,7 +123,7 @@
                             @endforeach
                             </tbody>
 
-                        </table>
+                        </table> --}}
                         <a href="{{route('cetak.pkp')}}" target="_blank" class="pull-right mt-4"><img src="{{asset('assets/images/print2.png')}}" style="max-width:80px" alt=""></a>
                     </div>
                 </div>

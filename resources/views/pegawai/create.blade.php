@@ -40,26 +40,30 @@
                             @csrf
                             <div class="form-group row">
                                 <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>NIP</label>
-                                <input class="form-control col-md-8" id="validationCustom0" type="text" name="uraian" required="">
+                                <input class="form-control col-md-8" id="validationCustom0" type="text" name="nip" required="">
                             </div>
                             <div class="form-group row">
                                 <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Nama</label>
-                                <input class="form-control col-md-8" id="validationCustom0" type="text" name="uraian" required="">
+                                <input class="form-control col-md-8" id="validationCustom0" type="text" name="nama" required="">
                             </div>
                             <div class="form-group row">
                                 <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Atasan</label>
-                                <input class="form-control col-md-8" id="validationCustom0" type="text" name="uraian" required="">
+                                <select class="form-control col-md-8" required="">
+                                    <option value="">- Pilih Atasan Langsung -</option>
+                                </select>
                             </div>
                             <div class="form-group row">
                                 <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Jabatan</label>
-                                <input class="form-control col-md-8" id="validationCustom0" type="text" name="uraian" required="">
+                                <select class="form-control col-md-8" required="">
+                                    <option value="">- Pilih Jabatan -</option>
+                                </select>
                             </div>
                             <div class="form-group row">
                                 <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Pangkat</label>
                                 <input class="form-control col-md-8" id="validationCustom0" type="text" name="uraian" required="">
                             </div>
                             <div class="form-group row">
-                                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Nomor Telfon</label>
+                                <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Nomor Telepon</label>
                                 <input class="form-control col-md-8" id="validationCustom0" type="text" name="uraian" required="">
                             </div>
                             <div class="form-group row">
@@ -68,7 +72,9 @@
                             </div>
                             <div class="form-group row">
                                 <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Level</label>
-                                <input class="form-control col-md-8" id="validationCustom0" type="text" name="uraian" required="">
+                                <select class="form-control col-md-8" required="">
+                                    <option value="">- Pilih Level -</option>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary d-block">Simpan</button>
                         </form>

@@ -38,8 +38,8 @@
                             @csrf
                             <div class="form-group row">
                                 <label for="validationCustom0" class="col-xl-3 col-md-4"><span>*</span>Indikator Kinerja</label>
-                                <select class="form-control select2 col-md-7" required="" name="indikator_kegiatan_id[]">
-                                    <option value="">- Piliha Indikator Kegiatan -</option>
+                                <select class="form-control select2 col-md-7" required="" name="indikator_kegiatan_id">
+                                    <option value="">- Pilihan Indikator Kegiatan -</option>
                                     @foreach($indikator as $key)
                                         <option value="{{$key->id}}">{{$key->uraian}}</option>
                                     @endforeach
@@ -47,7 +47,7 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-xl-3 col-md-4">Tanggal</label>
-                                <input class="form-control digits col-md-7" type="date" data-language="en" name="tanggal[]">
+                                <input class="form-control digits col-md-7" type="date" data-language="en" name="tanggal">
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Uraian Kegiatan</label>
