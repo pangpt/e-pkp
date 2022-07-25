@@ -28,7 +28,8 @@ class CreatePenilaianKinerjaTable extends Migration
             $table->string('satuan_realisasi')->nullable();
             $table->integer('kual_realisasi')->nullable();
             $table->integer('nilai_capaian')->nullable();
-            $table->decimal('nilai_total')->nullable();
+            $table->string('bulan')->nullable();
+            $table->year('tahun')->nullable();
             $table->timestamps();
         });
     }

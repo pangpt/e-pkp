@@ -10,6 +10,7 @@ use DB;
 use PDF;
 use Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class PenilaianKinerjaController extends Controller
 {
@@ -18,6 +19,7 @@ class PenilaianKinerjaController extends Controller
     public function index() {
 
         $data = IndikatorKegiatan::get();
+
         foreach($data as $item){
             $idn[] = IndikatorKegiatan::where('id', $item->id)->with('penilaian_kinerja')->get();
         }
@@ -53,6 +55,7 @@ class PenilaianKinerjaController extends Controller
 
     public function inputPenilaian(Request $request) {
         // $delete = PenilaianKinerja::where('user_id', 1)->delete();
+        
         foreach($request->kegiatan as $key => $val){
             $penilaian  = new PenilaianKinerja;
             $penilaian->user_id =  Auth::user()->id;
@@ -67,6 +70,8 @@ class PenilaianKinerjaController extends Controller
             $penilaian->kuant_realisasi =  $request->kuant_realisasi[$key];
             $penilaian->satuan_realisasi =  $request->satuan_realisasi[$key];
             $penilaian->kual_realisasi =  100;
+            $penilaian->bulan = Carbon::now()->isoFormat('MMMM');
+            $penilaian->tahun = Carbon::now()->isoFormat('YYYY');
 
 
 
