@@ -43,13 +43,14 @@ Route::group(['middleware' => 'ceklogin'], function() {
     Route::get('/masterdata/indikator', 'IndikatorKegiatanController@index')->name('indikator.index');
     Route::get('/masterdata/indikator/create', 'IndikatorKegiatanController@create')->name('indikator.create');
     Route::post('/masterdata/indikator/input', 'IndikatorKegiatanController@inputIndikator')->name('indikator.inputIndikator');
+    Route::get('/unitkerja', 'MasterController@unitkerja')->name('unitkerja.index');
+    Route::post('/unitkerja/edit', 'MasterController@editUnitKerja')->name('unitkerja.edit');
 
     Route::get('/akun', 'AkunController@akun')->name('akun');
     Route::post('/akun/edit', 'AkunController@editAkun')->name('akun.edit');
 
     Route::get('/pegawai', 'PegawaiController@index')->name('pegawai.index');
     Route::get('/pegawai/create', 'PegawaiController@create')->name('pegawai.create');
-
 
 
 });
