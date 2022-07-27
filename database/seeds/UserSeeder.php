@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
                 'satker' => 'Pengadilan Agama Watampone',
                 'phone' => '082192912912',
                 'jabatan' => 'Ahli Jago Pranata Komputer',
-                'level' => '2',
+                'level' => '3',
                 'created_at' => $now,
                 'updated_at' => $now
             ],
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
                 'satker' => 'Pengadilan Agama Watampone',
                 'phone' => '0821929122322',
                 'jabatan' => 'Ahli Jago Pranata Komputer',
-                'level' => '2',
+                'level' => '3',
                 'created_at' => $now,
                 'updated_at' => $now
             ],

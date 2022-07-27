@@ -18,10 +18,10 @@ class PenilaianKinerjaController extends Controller
 
     public function index() {
 
-        $data = IndikatorKegiatan::get();
+        $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
 
         foreach($data as $item){
-            $idn[] = IndikatorKegiatan::where('id', $item->id)->with('penilaian_kinerja')->get();
+            $idn[] = IndikatorKegiatan::where('user_id', Auth::user()->id)->with('penilaian_kinerja')->get();
         }
 
 
