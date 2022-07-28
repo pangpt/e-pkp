@@ -35,7 +35,7 @@ Route::group(['middleware' => 'ceklogin'], function() {
     Route::post('/penilaian/input', 'PenilaianKinerjaController@inputPenilaian')->name('penilaian.input');
     Route::post('/penilaian/action', 'PenilaianKinerjaController@actionPenilaian')->name('tabledit.action');
 
-    Route::get('penliaian/print', 'PenilaianKinerjaController@print')->name('cetak.pkp');
+    Route::get('penilaian/print', 'PenilaianKinerjaController@print')->name('cetak.pkp');
 
     Route::post('/penilaian/edit/{id}', 'PenilaianKinerjaController@editPKP')->name('penilaian.edit');
     Route::get('/penilaian/hapus/{id}', 'PenilaianKinerjaController@hapus')->name('penilaian.hapus');

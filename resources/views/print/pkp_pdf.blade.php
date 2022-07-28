@@ -1,9 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    table, td, th {
+        border: 1px solid;
+    }
 
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    #profil {
+        width: 60%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    </style>
+</head>
+<body>
+    <h4 style="text-align: center">FORMULIR PENILAIAN CAPAIAN KINERJA BULANAN <br> PEGAWAI NEGERI SIPIL</h4>
+    <h6>Bula: {{\Carbon\Carbon::now()->isoFormat('MMMM YYYY')}}</h6>
+    <table id="profil">
+        <tr>
+            <td>1</td>
+            <td>Nama</td>
+            <td>{{@Auth::user()->name}}</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>NIP</td>
+            <td>{{@Auth::user()->nip}}</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Pangkat/Gol Ruang</td>
+            <td>{{@Auth::user()->pangkat}}</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Jabatan</td>
+            <td>{{@Auth::user()->jabatan}}</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Unit Kerja</td>
+            <td>{{@$unitkerja->nama_unit_kerja}}</td>
+        </tr>
+    </table>
     @foreach($data as $item)
     <table id="editable" class="table table-bordered">
         <thead class="thead" style="background-color: yellow">
         <tr>
-            <th colspan="13">Indikator Kinerja: {{@$item->uraian}}</th>
+            <th colspan="11">Indikator Kinerja: {{@$item->uraian}}</th>
         </tr>
         <tr style="border-collapse: collapse; text-align: center">
             <th rowspan="2">No.</th>
@@ -13,7 +67,6 @@
             <th rowspan="2">AK</th>
             <th colspan="3">Realisasi</th>
             <th rowspan="2">Nilai Capaian Kerja</th>
-            <th rowspan="2">Aksi</th>
         </tr>
         <tr>
             <th>Kuant/Output</th>
@@ -24,13 +77,6 @@
             <th>Kual/Mutu</th>
         </tr>
         </thead>
-        <tfoot style="text-align: center">
-            <tr style="background-color: yellow">
-                <th colspan="10">Nilai Capaian</th>
-                <th>100</th>
-                <th></th>
-            </tr>
-        </tfoot>
         <tbody>
             @foreach($item->penilaian_kinerja as $key)
         <tr>
@@ -45,15 +91,15 @@
             <td>{{@$key->satuan_realisasi}}</td>
             <td>{{@$key->kual_realisasi}}</td>
             <td>{{@$key->nilai_capaian}}</td>
-            <td>
-                <div>
-                    <a href="#" class="btn-edit" data-toggle="modal" data-target="#editPKP" data-id="{{$key->id}}" data-keg="{{$key->kegiatan}}" data-akt="{{$key->angka_kredit_target}}" data-kt="{{$key->kuant_target}}" data-st="{{$key->satuan_target}}" data-klt="{{$key->kual_target}}" data-akr="{{$key->angka_kredit_realisasi}}" data-kr="{{$key->kuant_realisasi}}" data-sr="{{$key->satuan_realisasi}}" data-klr="{{$key->kual_realisasi}}" data-nilai="{{$key->nilai_capaian}}"><i class="fa fa-edit mr-2 font-success"></i></a>
-                    <a href="#" class="btn-hapus" data-toggle="modal" data-target="#hapusPKP" data-id="{{$key->id}}" data-url="{{route('penilaian.hapus', ['id' => $key->id])}}"><i class="fa fa-trash font-danger"></i></a>
-                </div>
-            </td>
         </tr>
         </tbody>
         @endforeach
+        <tfoot style="text-align: center">
+            <tr style="background-color: yellow">
+                <th colspan="10">Nilai Capaian</th>
+                <th>100</th>
+            </tr>
+        </tfoot>
     </table>
     @endforeach
     <table id="editable" class="table table-bordered">
@@ -84,3 +130,6 @@
         </tbody>
 
     </table>
+</body>
+</html>
+    

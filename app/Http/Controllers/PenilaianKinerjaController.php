@@ -11,6 +11,7 @@ use PDF;
 use Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+use App\UnitKerja;
 
 class PenilaianKinerjaController extends Controller
 {
@@ -147,12 +148,14 @@ class PenilaianKinerjaController extends Controller
 
     public function print(Request $request)
     {
-        // $data = IndikatorKegiatan::get();
+        $data = IndikatorKegiatan::get();
+        $unitkerja = UnitKerja::first();
 
-        // $pdf = PDF::loadview('print.pkp_pdf',[
-        //     'data' => $data,
-        // ])->setPaper('A4','landscape');
-        // return $pdf->stream();
-        return Excel::download(new PenilaianView, 'pkp.xlsx');
+        $pdf = PDF::loadview('print.pkp_pdf',[
+            'data' => $data,
+            'unitkerja' => $unitkerja,
+        ])->setPaper('A4','landscape');
+        return $pdf->stream();
+        // return Excel::download(new PenilaianView, 'pkp.xlsx');
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\UnitKerja;
 use App\Atasan;
 use App\Jabatan;
+use App\User;
 
 class MasterController extends Controller
 {
@@ -63,8 +64,17 @@ class MasterController extends Controller
         $data->jabatan = $request->jabatan;
         $data->save();
 
+        $datalogin = new User;
+        $datalogin->nip = $request->nip;
+        $datalogin->name = $request->name;
+        $data->atasan_id = '1';
+        $datalogin->jabatan = $request->jabatan;
+        $datalogin->password = bcrypt($request->nip);
+        $datalogin->save();
+
         return redirect()->route('atasan.index')->with([
             'data' => $data,
+            'data' => $datalogin,
         ]);
     }
 }

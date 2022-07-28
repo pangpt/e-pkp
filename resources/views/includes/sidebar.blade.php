@@ -16,8 +16,10 @@
                     <li><a href="{{route('indikator.index')}}"><i class="fa fa-circle"></i>Indikator Kinerja</a></li>
                     {{-- <li><a href="transactions.html"><i class="fa fa-circle"></i>Pangkat/ Golongan</a></li> --}}
                     {{-- <li><a href="transactions.html"><i class="fa fa-circle"></i>Jabatan</a></li> --}}
+                    @if(Auth::user()->level == 1)
                     <li><a href="{{route('unitkerja.index')}}"><i class="fa fa-circle"></i>Unit Kerja</a></li>
                     <li><a href="{{route('atasan.index')}}"><i class="fa fa-circle"></i>Manajemen Atasan</a></li>
+                    @endif
                 </ul>
             </li>
             <li><a class="sidebar-header" href=""><i data-feather="clipboard"></i><span>Penilaian Kinerja</span><i class="fa fa-angle-right pull-right"></i></a>
@@ -27,7 +29,10 @@
                 </ul>
             </li>
             {{-- <li><a class="sidebar-header" href="reports.html"><i data-feather="clipboard"></i><span>Sasaran Kinerja</span></a></li> --}}
+            @if(Auth::user()->level == 1)
             <li><a class="sidebar-header" href="{{route('pegawai.index')}}"><i data-feather="users"></i><span>Manajemen Pegawai</span></a></li>
+            @endif
+            <li><a class="sidebar-header" href="{{route('pegawai.index')}}"><i data-feather="users"></i><span>Monitoring PKP</span></a></li>
             <li><a class="sidebar-header" href="{{route('akun')}}"><i data-feather="user"></i><span>Akun</span></a>
             </li>
             <li><a class="sidebar-header" href="login.html"><i data-feather="log-in"></i><span>Logout</span></a>
