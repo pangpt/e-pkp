@@ -10,7 +10,7 @@
             <h6 class="mt-3 f-14">{{Auth::user()->name}}</h6>
         </div>
         <ul class="sidebar-menu">
-            <li><a class="sidebar-header" href="index.html"><i data-feather="home"></i><span>Dashboard</span></a></li>
+            <li><a class="sidebar-header" href="{{route('dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a></li>
             <li><a class="sidebar-header" href=""><i data-feather="settings"></i><span>Master Data</span><i class="fa fa-angle-right pull-right"></i></a>
                 <ul class="sidebar-submenu">
                     <li><a href="{{route('indikator.index')}}"><i class="fa fa-circle"></i>Indikator Kinerja</a></li>

@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
 
 Route::get('/pkp/index', function () {
     return view('pkp.index');
@@ -25,7 +25,7 @@ Route::get('/pkp/create', function () {
     return view('pkp.create');
 });
 
-Route::get('/loginpage', 'LoginController@loginpage')->name('loginpage');
+Route::get('/', 'LoginController@loginpage')->name('loginpage');
 Route::post('/login', 'LoginController@login')->name('login');
 
 Route::group(['middleware' => 'ceklogin'], function() {
