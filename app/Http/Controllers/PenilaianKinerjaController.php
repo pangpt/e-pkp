@@ -6,6 +6,7 @@ use App\Exports\PenilaianView;
 use Illuminate\Http\Request;
 use App\IndikatorKegiatan;
 use App\PenilaianKinerja;
+use App\PkpTotal;
 use DB;
 use PDF;
 use Auth;
@@ -21,9 +22,13 @@ class PenilaianKinerjaController extends Controller
 
         $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
 
+        // dd($data->uraian);
+
         foreach($data as $item){
-            $idn[] = IndikatorKegiatan::where('user_id', Auth::user()->id)->with('penilaian_kinerja')->get();
+            $cek[] = PenilaianKinerja::where('indikator_kegiatan_id', $item->id)->get();
         }
+
+        // dd($cek);
 
 
 
@@ -148,6 +153,29 @@ class PenilaianKinerjaController extends Controller
 
     public function print(Request $request)
     {
+        $datapkp = PenilaianKinerja::where('user_id', Auth::user()->id)->groupBy('indikator_kegiatan_id')->selectRaw('sum(nilai_capaian) as nilai_capaian, user_id, indikator_kegiatan_id, user_id,id')->first();
+// dd($datapkp);
+        
+        $nilai = PenilaianKinerja::where('user_id', Auth::user()->id)->sum('nilai_capaian');
+        $pembagi = PenilaianKinerja::where('user_id', Auth::user()->id)->count('nilai_capaian');
+
+        $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
+
+
+        $inputnilai = new PkpTotal;
+        $inputnilai->user_id = Auth::user()->id;
+        $inputnilai->indikator_kegiatan_id = $datapkp->indikator_kegiatan_id;
+        $inputnilai->penilaian_kinerja_id = $datapkp->id;
+        $inputnilai->total_nilai = $datapkp->nilai_capaian / $pembagi;
+        $inputnilai->save();
+        dd($inputnilai);
+
+        // foreach($data as $item){
+        //     $cek[] = PenilaianKinerja::where('indikator_kegiatan_id', $item->id)->get();
+        // }
+
+
+        
         // $headers = array(
         //     "Content-type"=>"text-/html",
         //     "Content-Disposition"=>"attachment;Filename=Coba.rtf"
