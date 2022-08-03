@@ -15,6 +15,7 @@ class CreateIndikatorKegiatanTable extends Migration
     {
         Schema::create('indikator_kegiatan', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('uraian');
             $table->timestamps();
         });

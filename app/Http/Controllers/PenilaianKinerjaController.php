@@ -21,14 +21,12 @@ class PenilaianKinerjaController extends Controller
     public function index() {
 
         $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
-
+        $nilai = PenilaianKinerja::where('user_id', Auth::user()->id)->sum('nilai_capaian');
+        $pembagi = PenilaianKinerja::where('user_id', Auth::user()->id)->count('nilai_capaian');
         // dd($data->uraian);
-
         foreach($data as $item){
             $cek[] = PenilaianKinerja::where('indikator_kegiatan_id', $item->id)->get();
         }
-
-        // dd($cek);
 
 
 
@@ -46,6 +44,8 @@ class PenilaianKinerjaController extends Controller
 
         return view('pkp.index', [
             'data' => $data,
+            'nilai' => $nilai,
+            'pembagi' => $pembagi,
         ]);
     }
 
