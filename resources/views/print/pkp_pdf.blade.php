@@ -22,6 +22,9 @@
         margin-bottom: 20px;
     }
     </style>
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/admin.css">
+
 </head>
 <body>
     <h4 style="text-align: center">FORMULIR PENILAIAN CAPAIAN KINERJA BULANAN <br> PEGAWAI NEGERI SIPIL</h4>
@@ -97,39 +100,38 @@
         <tfoot style="text-align: center">
             <tr style="background-color: yellow">
                 <th colspan="10">Nilai Capaian</th>
-                <th>100</th>
+                <th>{{$nilai / $pembagi}}</th>
             </tr>
         </tfoot>
     </table>
     @endforeach
     <table id="editable" class="table table-bordered">
         <thead class="thead" style="background-color: yellow">
-        <tr>
-            <th colspan="3" style="text-align: center">REKAPITULASI PENILAIAN CAPAIAN KINERJA BULAN 2022</th>
-        </tr>
-        <tr style="border-collapse: collapse; text-align: center">
-            <th rowspan="2" style="width:5%">No.</th>
-            <th rowspan="2">Kegiatan Tugas Jabatan</th>
-            <th rowspan="2" style="width:15%">Nilai Capaian Kerja</th>
-        </tr>
+            <tr>
+                <th colspan="3" style="text-align: center">REKAPITULASI PENILAIAN CAPAIAN KINERJA BULAN 2022</th>
+            </tr>
+            <tr style="border-collapse: collapse; text-align: center">
+                <th rowspan="1" style="width:5%">No.</th>
+                <th rowspan="1">Kegiatan Tugas Jabatan</th>
+                <th rowspan="1" style="width:15%">Nilai Capaian Kerja</th>
+            </tr>
         </thead>
-        <tfoot style="text-align: center">
+        <tbody>
+            @foreach($data as $key)
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{@$key->uraian}}</td>
+                <td>{{@$key->angka_kredit_target}}</td>
+            </tr>
+             @endforeach
             <tr style="background-color: yellow">
                 <th colspan="2">Hasil Capaian Kerja Bulan </th>
                 <th>100</th>
             </tr>
-        </tfoot>
-        <tbody>
-            @foreach($data as $key)
-        <tr>
-            <td>{{$loop->iteration}}</td>
-            <td>{{@$key->uraian}}</td>
-            <td>{{@$key->angka_kredit_target}}</td>
-        </tr>
-        @endforeach
         </tbody>
 
     </table>
+    <script src="/assets/js/bootstrap.js"></script>
 </body>
 </html>
     

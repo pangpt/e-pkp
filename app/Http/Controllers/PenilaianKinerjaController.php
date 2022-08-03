@@ -162,13 +162,13 @@ class PenilaianKinerjaController extends Controller
         $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
 
 
-        $inputnilai = new PkpTotal;
-        $inputnilai->user_id = Auth::user()->id;
-        $inputnilai->indikator_kegiatan_id = $datapkp->indikator_kegiatan_id;
-        $inputnilai->penilaian_kinerja_id = $datapkp->id;
-        $inputnilai->total_nilai = $datapkp->nilai_capaian / $pembagi;
-        $inputnilai->save();
-        dd($inputnilai);
+        // $inputnilai = new PkpTotal;
+        // $inputnilai->user_id = Auth::user()->id;
+        // $inputnilai->indikator_kegiatan_id = $datapkp->indikator_kegiatan_id;
+        // $inputnilai->penilaian_kinerja_id = $datapkp->id;
+        // $inputnilai->total_nilai = $datapkp->nilai_capaian / $pembagi;
+        // $inputnilai->save();
+        // dd($inputnilai);
 
         // foreach($data as $item){
         //     $cek[] = PenilaianKinerja::where('indikator_kegiatan_id', $item->id)->get();
@@ -195,12 +195,16 @@ class PenilaianKinerjaController extends Controller
 
         // </html>';
         // return \Response::make($content,200, $headers);
-        $data = IndikatorKegiatan::get();
+        $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
         $unitkerja = UnitKerja::first();
+        // $pkptotal = PkpTotal::get();
+        // dd($pkptotal);
 
         $pdf = PDF::loadview('print.pkp_pdf',[
             'data' => $data,
             'unitkerja' => $unitkerja,
+            'pembagi' => $pembagi,
+            'nilai' => $nilai,
         ])->setPaper('A4','landscape');
         return $pdf->stream();
         return Excel::download(new PenilaianView, 'pkp.xlsx');
