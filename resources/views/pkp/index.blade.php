@@ -110,16 +110,24 @@
                             <tfoot style="text-align: center">
                                 <tr style="background-color: yellow">
                                     <th colspan="2">Hasil Capaian Kerja Bulan </th>
-                                    <th>{{$nilai / $pembagi}}</th>
+                                    <th>0</th>
                                 </tr>
                             </tfoot>
                             <tbody>
                             @foreach($data as $key)
+                            @if(@$key->penilaian_kinerja->count() != 0)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{@$key->uraian}}</td>
                                 <td>{{@$key->penilaian_kinerja->sum('nilai_capaian') / @$key->penilaian_kinerja->count()}}</td>
                             </tr>
+                            @else 
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{@$key->uraian}}</td>
+                                <td>0</td>
+                            </tr>
+                            @endif
                             @endforeach
                             </tbody>
 

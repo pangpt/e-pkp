@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePkpTotalTable extends Migration
+class CreateRekapPkpTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreatePkpTotalTable extends Migration
      */
     public function up()
     {
-        Schema::create('pkp_total', function (Blueprint $table) {
+        Schema::create('rekap_pkp', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('penilaian_kinerja_id');
-            $table->unsignedBigInteger('indikator_kegiatan_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('indikator_kegiatan');
             $table->integer('total_nilai');
+            $table->string('bulan')->nullable();
+            $table->year('tahun')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreatePkpTotalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pkp_total');
+        Schema::dropIfExists('rekap_pkp');
     }
 }

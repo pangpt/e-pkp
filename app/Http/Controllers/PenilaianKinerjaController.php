@@ -6,7 +6,7 @@ use App\Exports\PenilaianView;
 use Illuminate\Http\Request;
 use App\IndikatorKegiatan;
 use App\PenilaianKinerja;
-use App\PkpTotal;
+use App\RekapPkp;
 use DB;
 use PDF;
 use Auth;
@@ -153,48 +153,48 @@ class PenilaianKinerjaController extends Controller
 
     public function print(Request $request)
     {
-        $datapkp = PenilaianKinerja::where('user_id', Auth::user()->id)->groupBy('indikator_kegiatan_id')->selectRaw('sum(nilai_capaian) as nilai_capaian, user_id, indikator_kegiatan_id, user_id,id')->first();
-// dd($datapkp);
+        $datapkp = PenilaianKinerja::where('user_id', Auth::user()->id)->groupBy('indikator_kegiatan_id')->selectRaw('sum(nilai_capaian) as nilai_capaian, user_id, indikator_kegiatan_id, user_id,id, tanggal, bulan')->get();
+// dd($datapkp->indikator_kegiatan->uraian);
         
         $nilai = PenilaianKinerja::where('user_id', Auth::user()->id)->sum('nilai_capaian');
         $pembagi = PenilaianKinerja::where('user_id', Auth::user()->id)->count('nilai_capaian');
 
         $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
+        $rekap = RekapPkp::where('user_id', Auth::user()->id)->get();
+        // dd($rekap);
 
 
-        // $inputnilai = new PkpTotal;
-        // $inputnilai->user_id = Auth::user()->id;
-        // $inputnilai->indikator_kegiatan_id = $datapkp->indikator_kegiatan_id;
-        // $inputnilai->penilaian_kinerja_id = $datapkp->id;
-        // $inputnilai->total_nilai = $datapkp->nilai_capaian / $pembagi;
-        // $inputnilai->save();
+        if(!empty($rekap)) {
+            $rekap = RekapPkp::where('user_id', Auth::user()->id)->delete();
+            foreach($datapkp as $item){
+                $inputnilai = new RekapPkp;
+                $inputnilai->user_id = Auth::user()->id;
+                $inputnilai->indikator_kegiatan = $item->indikator_kegiatan->uraian;
+                $inputnilai->penilaian_kinerja_id = $item->id;
+                $inputnilai->bulan = $item->bulan;
+                $inputnilai->tahun = $item->tahun;
+                $inputnilai->total_nilai = $item->nilai_capaian;
+                $inputnilai->save();
+                // dd($inputnilai);
+            }
+        } else {
+            foreach($datapkp as $item){
+                $inputnilai = new RekapPkp;
+                $inputnilai->user_id = Auth::user()->id;
+                $inputnilai->indikator_kegiatan = $item->indikator_kegiatan->uraian;
+                $inputnilai->penilaian_kinerja_id = $item->id;
+                $inputnilai->bulan = $item->bulan;
+                $inputnilai->tahun = $item->tahun;
+                $inputnilai->total_nilai = $item->nilai_capaian;
+                $inputnilai->save();
+                // dd($inputnilai);
+            }
+        }
+        
+        
         // dd($inputnilai);
 
-        // foreach($data as $item){
-        //     $cek[] = PenilaianKinerja::where('indikator_kegiatan_id', $item->id)->get();
-        // }
-
-
-        
-        // $headers = array(
-        //     "Content-type"=>"text-/html",
-        //     "Content-Disposition"=>"attachment;Filename=Coba.rtf"
-        // );
-
-        // $content = '<html>
-
-        // <head><meta charset="utf-8"></head>
-
-        // <body>
-
-        //     <p>My Blog Laravel 7 generate word document from html Example - Nicesnippets.com</p>
-
-        //     <ul><li>Php</li><li>Laravel</li><li>Html</li></ul>
-
-        // </body>
-
-        // </html>';
-        // return \Response::make($content,200, $headers);
+    
         $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
         $unitkerja = UnitKerja::first();
         // $pkptotal = PkpTotal::get();
