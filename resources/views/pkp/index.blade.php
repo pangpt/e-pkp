@@ -110,7 +110,7 @@
                             <tfoot style="text-align: center">
                                 <tr style="background-color: yellow">
                                     <th colspan="2">Hasil Capaian Kerja Bulan </th>
-                                    <th>0</th>
+                                    <th>{{number_format($nilai / $pembagi, 2, '.', '')}}</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -119,7 +119,7 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{@$key->uraian}}</td>
-                                <td>{{@$key->penilaian_kinerja->sum('nilai_capaian') / @$key->penilaian_kinerja->count()}}</td>
+                                <td>{{number_format(@$key->penilaian_kinerja->sum('nilai_capaian') / @$key->penilaian_kinerja->count(), 2, '.', '')}}</td>
                             </tr>
                             @else 
                             <tr>

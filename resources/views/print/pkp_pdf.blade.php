@@ -118,17 +118,31 @@
         </thead>
         <tbody>
             @foreach($data as $key)
+            @if(@$key->penilaian_kinerja->count() != 0)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{@$key->uraian}}</td>
-                <td>{{@$key->angka_kredit_target}}</td>
+                <td>{{number_format(@$key->penilaian_kinerja->sum('nilai_capaian') / @$key->penilaian_kinerja->count(), 2, '.', '')}}</td>
             </tr>
-             @endforeach
+            @else 
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{@$key->uraian}}</td>
+                <td>0</td>
+            </tr>
+            @endif
+            @endforeach
+            {{-- <tr style="background-color: yellow">
+                <th colspan="2">Hasil Capaian Kerja Bulan </th>
+                <th>{{number_format($nilai / $pembagi, 2, '.', '')}}</th>
+            </tr> --}}
+        </tbody>
+        <tfoot style="text-align: center">
             <tr style="background-color: yellow">
                 <th colspan="2">Hasil Capaian Kerja Bulan </th>
-                <th>100</th>
+                <th>{{number_format($nilai / $pembagi, 2, '.', '')}}</th>
             </tr>
-        </tbody>
+        </tfoot>
 
     </table>
     <script src="/assets/js/bootstrap.js"></script>

@@ -23,7 +23,7 @@ class PenilaianKinerjaController extends Controller
         $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
         $nilai = PenilaianKinerja::where('user_id', Auth::user()->id)->sum('nilai_capaian');
         $pembagi = PenilaianKinerja::where('user_id', Auth::user()->id)->count('nilai_capaian');
-        // dd($data->uraian);
+        // dd($pembagi);
         foreach($data as $item){
             $cek[] = PenilaianKinerja::where('indikator_kegiatan_id', $item->id)->get();
         }
@@ -154,12 +154,19 @@ class PenilaianKinerjaController extends Controller
     public function print(Request $request)
     {
         $datapkp = PenilaianKinerja::where('user_id', Auth::user()->id)->groupBy('indikator_kegiatan_id')->selectRaw('sum(nilai_capaian) as nilai_capaian, user_id, indikator_kegiatan_id, user_id,id, tanggal, bulan')->get();
+        // dd($datapkp);
 // dd($datapkp->indikator_kegiatan->uraian);
         
         $nilai = PenilaianKinerja::where('user_id', Auth::user()->id)->sum('nilai_capaian');
         $pembagi = PenilaianKinerja::where('user_id', Auth::user()->id)->count('nilai_capaian');
 
+        $a = [];
         $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
+        foreach($data as $item){
+            $a[] = $item->penilaian_kinerja;
+        }
+
+        dd($a[0]);
         $rekap = RekapPkp::where('user_id', Auth::user()->id)->get();
         // dd($rekap);
 
