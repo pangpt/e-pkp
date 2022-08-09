@@ -100,7 +100,7 @@
         <tfoot style="text-align: center">
             <tr style="background-color: yellow">
                 <th colspan="10">Nilai Capaian</th>
-                <th>{{$nilai / $pembagi}}</th>
+                <th>{{number_format(@$item->penilaian_kinerja->sum('nilai_capaian') / @$item->penilaian_kinerja->count(), 2, '.', '')}}</th>
             </tr>
         </tfoot>
     </table>
@@ -144,6 +144,20 @@
             </tr>
         </tfoot>
 
+    </table>
+    <table style="border:none;">
+        <tr>
+            <td>Yang Menilai</td>
+            <td style="text-align: right">Yang Dinilai</td>
+        </tr>
+        <tr>
+            <td style="text-align: right; margin-bottom: 100px"><br><br><br></td>
+            <td style="text-align: right; margin-bottom: 100px"><br><br><br></td>
+        </tr>
+        <tr>
+            <td>Pak Sekma</td>
+            <td style="text-align: right">Panggih Tridarma</td>
+        </tr>
     </table>
     <script src="/assets/js/bootstrap.js"></script>
 </body>

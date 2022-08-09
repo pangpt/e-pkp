@@ -30,18 +30,6 @@ class PenilaianKinerjaController extends Controller
 
 
 
-        // dd($a);
-
-        // foreach($data as $item){
-        //     $ind = IndikatorKegiatan::where('id', $a)->with('penilaian_kinerja')->get();
-        //         foreach($ind as $key) {
-        //             $b = $key->penilaian_kinerja->sum('nilai_capaian');
-        //         }
-        // }
-        // dd($b);
-
-
-
         return view('pkp.index', [
             'data' => $data,
             'nilai' => $nilai,
@@ -162,11 +150,6 @@ class PenilaianKinerjaController extends Controller
 
         $a = [];
         $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
-        foreach($data as $item){
-            $a[] = $item->penilaian_kinerja;
-        }
-
-        dd($a[0]);
         $rekap = RekapPkp::where('user_id', Auth::user()->id)->get();
         // dd($rekap);
 

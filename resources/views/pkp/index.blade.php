@@ -64,13 +64,13 @@
                                 <th>Kual/Mutu</th>
                             </tr>
                             </thead>
-                            {{-- <tfoot style="text-align: center">
+                            <tfoot style="text-align: center">
                                 <tr style="background-color: yellow">
                                     <th colspan="10">Nilai Capaian</th>
-                                    <th>100</th>
+                                    <th>{{number_format(@$item->penilaian_kinerja->sum('nilai_capaian') / @$item->penilaian_kinerja->count(), 2, '.', '')}}</th>
                                     <th></th>
                                 </tr>
-                            </tfoot> --}}
+                            </tfoot>
                             <tbody>
                                 @foreach($item->penilaian_kinerja as $key)
                             <tr>
