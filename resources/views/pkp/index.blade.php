@@ -35,6 +35,23 @@
                         <h5>Penilaian Kinerja Pegawai</h5>
                     </div>
                     <div class="card-body order-datatable">
+                        <form action="">
+                            <div class="row mb-4">
+                                <div class="col-2">
+                                     <select class="form-control" required="">
+                                        <option value="">-Bulan-</option>
+                                     </select>
+                                </div>
+                                <div class="col-2">
+                                     <select class="form-control" required="">
+                                        <option value="">-Tahun-</option>
+                                     </select>
+                                </div>
+                                <div class="col-2">
+                                     <a href="{{route('penilaian.create')}}" class="btn btn-primary">Filter</a>
+                                </div>
+                            </div>
+                        </form>
                         <div class="btn-popup pull-right">
                             <a href="{{route('penilaian.create')}}" class="btn btn-secondary">Buat PKP</a>
                         </div>
@@ -64,6 +81,7 @@
                                 <th>Kual/Mutu</th>
                             </tr>
                             </thead>
+                            @if(@$item->penilaian_kinerja->count() != 0)
                             <tfoot style="text-align: center">
                                 <tr style="background-color: yellow">
                                     <th colspan="10">Nilai Capaian</th>
@@ -71,6 +89,15 @@
                                     <th></th>
                                 </tr>
                             </tfoot>
+                            @else
+                            <tfoot style="text-align: center">
+                                <tr style="background-color: yellow">
+                                    <th colspan="10">Nilai Capaian</th>
+                                    <th>0</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                            @endif
                             <tbody>
                                 @foreach($item->penilaian_kinerja as $key)
                             <tr>
@@ -107,19 +134,28 @@
                                 <th rowspan="2" style="width:15%">Nilai Capaian Kerja</th>
                             </tr>
                             </thead>
+                            @if(@$data->count() != 0)
                             <tfoot style="text-align: center">
                                 <tr style="background-color: yellow">
                                     <th colspan="2">Hasil Capaian Kerja Bulan </th>
-                                    <th>{{number_format($nilai / $pembagi, 2, '.', '')}}</th>
+                                    <th>{{number_format($rata, 2, '.', '')}}</th>
                                 </tr>
                             </tfoot>
+                            @else
+                            <tfoot style="text-align: center">
+                                <tr style="background-color: yellow">
+                                    <th colspan="2">Hasil Capaian Kerja Bulan </th>
+                                    <th>0</th>
+                                </tr>
+                            </tfoot>
+                            @endif
                             <tbody>
                             @foreach($data as $key)
-                            @if(@$key->penilaian_kinerja->count() != 0)
+                            @if(@$data->count() != 0)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{@$key->uraian}}</td>
-                                <td>{{number_format(@$key->penilaian_kinerja->sum('nilai_capaian') / @$key->penilaian_kinerja->count(), 2, '.', '')}}</td>
+                                <td>{{number_format(@$key->penilaian_kinerja->sum('nilai_capaian') / @$data->count(), 2, '.', '')}}</td>
                             </tr>
                             @else 
                             <tr>

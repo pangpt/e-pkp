@@ -21,6 +21,9 @@
         border-collapse: collapse;
         margin-bottom: 20px;
     }
+    #foot tr td {
+        border: 0px solid;
+    }
     </style>
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/admin.css">
@@ -145,18 +148,19 @@
         </tfoot>
 
     </table>
-    <table style="border:none;">
+    <br>
+    <table class="foot">
         <tr>
             <td>Yang Menilai</td>
             <td style="text-align: right">Yang Dinilai</td>
         </tr>
         <tr>
-            <td style="text-align: right; margin-bottom: 100px"><br><br><br></td>
-            <td style="text-align: right; margin-bottom: 100px"><br><br><br></td>
+            <td style="text-align: right; margin-bottom: 100px"><br><br><br><br><br><br></td>
+            <td style="text-align: right; margin-bottom: 100px"><br><br><br><br><br><br></td>
         </tr>
         <tr>
             <td>Pak Sekma</td>
-            <td style="text-align: right">Panggih Tridarma</td>
+            <td style="text-align: right; text-decoration: underline;">{{Auth::user()->name}}<br><span>{{Auth::user()->nip}}</span></td>
         </tr>
     </table>
     <script src="/assets/js/bootstrap.js"></script>

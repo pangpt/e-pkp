@@ -22,18 +22,28 @@ class PenilaianKinerjaController extends Controller
 
         $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
         $nilai = PenilaianKinerja::where('user_id', Auth::user()->id)->sum('nilai_capaian');
-        $pembagi = PenilaianKinerja::where('user_id', Auth::user()->id)->count('nilai_capaian');
-        // dd($pembagi);
-        foreach($data as $item){
-            $cek[] = PenilaianKinerja::where('indikator_kegiatan_id', $item->id)->get();
+        
+        $rata_indikator = [];
+        foreach ($data as $item) {
+            $capaian = PenilaianKinerja::where('indikator_kegiatan_id', $item->id)->pluck('nilai_capaian');
+            $rataCapaian = $capaian->count() > 0 ? $capaian->sum() / $capaian->count() : 0;
+
+            $rata_indikator[$item->id] = $rataCapaian;
         }
 
+        $totalNilai = array_sum($rata_indikator);
 
+        // Hitung rata-rata dari array indikator
+        $rataTotal = count($rata_indikator) > 0 ? $totalNilai / count($rata_indikator) : 0;
+
+        // dd($rata_indikator, $totalNilai, $rataTotal);
 
         return view('pkp.index', [
             'data' => $data,
-            'nilai' => $nilai,
-            'pembagi' => $pembagi,
+            'rataIndikator' => $rata_indikator,
+            'nilai' => $totalNilai,
+            'rata' => $rataTotal
+            // 'pembagi' => $pembagi,
         ]);
     }
 
