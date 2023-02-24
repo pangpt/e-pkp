@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\PenilaianView;
+use App\Exports\ExportExcel;
 use Illuminate\Http\Request;
 use App\IndikatorKegiatan;
 use App\PenilaianKinerja;
@@ -13,6 +13,7 @@ use Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 use App\UnitKerja;
+use Illuminate\Support\Collection;
 
 class PenilaianKinerjaController extends Controller
 {
@@ -22,7 +23,7 @@ class PenilaianKinerjaController extends Controller
 
         $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
         $nilai = PenilaianKinerja::where('user_id', Auth::user()->id)->sum('nilai_capaian');
-        
+
         $rata_indikator = [];
         foreach ($data as $item) {
             $capaian = PenilaianKinerja::where('indikator_kegiatan_id', $item->id)->pluck('nilai_capaian');
@@ -59,7 +60,7 @@ class PenilaianKinerjaController extends Controller
 
     public function inputPenilaian(Request $request) {
         // $delete = PenilaianKinerja::where('user_id', 1)->delete();
-        
+
         foreach($request->kegiatan as $key => $val){
             $penilaian  = new PenilaianKinerja;
             $penilaian->user_id =  Auth::user()->id;
@@ -154,7 +155,7 @@ class PenilaianKinerjaController extends Controller
         $datapkp = PenilaianKinerja::where('user_id', Auth::user()->id)->groupBy('indikator_kegiatan_id')->selectRaw('sum(nilai_capaian) as nilai_capaian, user_id, indikator_kegiatan_id, user_id,id, tanggal, bulan')->get();
         // dd($datapkp);
 // dd($datapkp->indikator_kegiatan->uraian);
-        
+
         $nilai = PenilaianKinerja::where('user_id', Auth::user()->id)->sum('nilai_capaian');
         $pembagi = PenilaianKinerja::where('user_id', Auth::user()->id)->count('nilai_capaian');
 
@@ -190,23 +191,112 @@ class PenilaianKinerjaController extends Controller
                 // dd($inputnilai);
             }
         }
-        
-        
+
+
         // dd($inputnilai);
 
-    
+
         $data = IndikatorKegiatan::where('user_id', Auth::user()->id)->get();
         $unitkerja = UnitKerja::first();
         // $pkptotal = PkpTotal::get();
         // dd($pkptotal);
+        $rata_indikator = [];
+        foreach ($data as $item) {
+            $capaian = PenilaianKinerja::where('indikator_kegiatan_id', $item->id)->pluck('nilai_capaian');
+            $rataCapaian = $capaian->count() > 0 ? $capaian->sum() / $capaian->count() : 0;
+
+            $rata_indikator[$item->id] = $rataCapaian;
+        }
+
+        $totalNilai = array_sum($rata_indikator);
+
+        // Hitung rata-rata dari array indikator
+        $rataTotal = count($rata_indikator) > 0 ? $totalNilai / count($rata_indikator) : 0;
+
 
         $pdf = PDF::loadview('print.pkp_pdf',[
             'data' => $data,
             'unitkerja' => $unitkerja,
             'pembagi' => $pembagi,
             'nilai' => $nilai,
+            'rata' => $rataTotal,
         ])->setPaper('A4','landscape');
         return $pdf->stream();
-        return Excel::download(new PenilaianView, 'pkp.xlsx');
     }
+
+    public function exportToExcel()
+    {
+        // Retrieve data from database
+        $data = DB::table('users')->get();
+
+        // Create a collection of data for export
+        $exportData = new Collection();
+
+        // Set the header for the exported data
+        $exportData->push([
+            'No',
+            'Name',
+            'Address',
+            'Contact',
+            'Status',
+            'Details'
+        ]);
+
+        // Loop through the data and add each row to the collection
+        foreach ($data as $key => $value) {
+            $row = [];
+
+            // Add the value for each column in the row
+            $row[] = $key + 1;
+            $row[] = 'ad';
+            $row[] = 'sdsd';
+            $row[] ='asdsd';
+            $row[] ='asdsds';
+
+            // Add the details row with rowspan and colspan
+            $row[] = [
+                [
+                    'rowspan' => 2,
+                    'value' => 'Details'
+                ],
+                [
+                    'value' => 'Indikator 1',
+                    'colspan' => 2,
+                ],
+                [
+                    'value' => 'Indikator 2',
+                    'colspan' => 2,
+                ],
+                [
+                    'value' => 'Indikator 3',
+                    'colspan' => 2,
+                ]
+            ];
+            $row[] = [
+                [
+                    'value' => 'Nilai',
+                ],
+                [
+                    'value' => 'Bobot',
+                ],
+                [
+                    'value' => 'Nilai',
+                ],
+                [
+                    'value' => 'Bobot',
+                ],
+                [
+                    'value' => 'Nilai',
+                ],
+                [
+                    'value' => 'Bobot',
+                ]
+            ];
+            $exportData->push($row);
+        }
+
+        // Export the data to Excel
+        return Excel::download(new ExportExcel($exportData), 'data.xlsx');
+    }
+
 }
