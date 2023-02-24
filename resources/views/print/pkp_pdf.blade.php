@@ -103,7 +103,7 @@
         <tfoot style="text-align: center">
             <tr style="background-color: yellow">
                 <th colspan="10">Nilai Capaian</th>
-                <th>{{number_format(@$item->penilaian_kinerja->sum('nilai_capaian') / @$item->penilaian_kinerja->count(), 2, '.', '')}}</th>
+                <th>{{@$item->penilaian_kinerja->count() == 0 ? 0 : number_format(@$item->penilaian_kinerja->sum('nilai_capaian') / @$item->penilaian_kinerja->count(), 2, '.', '')}}</th>
             </tr>
         </tfoot>
     </table>
@@ -121,13 +121,13 @@
         </thead>
         <tbody>
             @foreach($data as $key)
-            @if(@$key->penilaian_kinerja->count() != 0)
+            @if(@$data->count() != 0)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{@$key->uraian}}</td>
-                <td>{{number_format(@$key->penilaian_kinerja->sum('nilai_capaian') / @$key->penilaian_kinerja->count(), 2, '.', '')}}</td>
+                <td>{{number_format(@$key->penilaian_kinerja->sum('nilai_capaian') / @$data->count(), 2, '.', '')}}</td>
             </tr>
-            @else 
+            @else
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{@$key->uraian}}</td>
@@ -143,7 +143,7 @@
         <tfoot style="text-align: center">
             <tr style="background-color: yellow">
                 <th colspan="2">Hasil Capaian Kerja Bulan </th>
-                <th>{{number_format($nilai / $pembagi, 2, '.', '')}}</th>
+                <th>{{number_format($rata, 2, '.', '')}}</th>
             </tr>
         </tfoot>
 
@@ -166,4 +166,4 @@
     <script src="/assets/js/bootstrap.js"></script>
 </body>
 </html>
-    
+
