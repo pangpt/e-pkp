@@ -13,6 +13,8 @@ use Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 use App\UnitKerja;
+use Illuminate\Support\Collection;
+use App\Exports\ExportExcel;
 
 class PenilaianKinerjaController extends Controller
 {
@@ -208,5 +210,10 @@ class PenilaianKinerjaController extends Controller
         ])->setPaper('A4','landscape');
         return $pdf->stream();
         return Excel::download(new PenilaianView, 'pkp.xlsx');
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new ExportExcel, 'penilaian_kinerja.xlsx');
     }
 }
